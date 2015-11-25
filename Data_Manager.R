@@ -1,5 +1,9 @@
 
 #setwd("C:/users/Melissa/Documents/CSCI540-NCVS_Exploration/")
+#Notes: Memory allocation was a problem at times, my work around was
+#  Use gc() (stands for garbage collector) frequently and increase memory
+#  with memory.limit(size=12003)
+
 ################################################################
 ####   reading in the data for 2009, 2010, 2011, 
 ####   2012, 2013, 2014
