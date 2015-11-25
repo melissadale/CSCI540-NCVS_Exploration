@@ -173,6 +173,26 @@ ncsv.incident.2014 <- read.delim('Data/2014/36142-0004-Data.tsv')
 ncsv.level.2014 <- read.delim('Data/2014/36142-0005-Data.tsv')
 gc()
 
+#link together, unique identifier across records on IDHH and YEARQ
+#Create Unique Identifiers
+ncsv.household.2014$key <- ncsv.household.2014$IDHH + ncsv.household.2014$YEARQ
+ncsv.person.2014$key <- ncsv.person.2014$IDHH + ncsv.person.2014$YEARQ
+ncsv.incident.2014$key <- ncsv.incident.2014$IDHH + ncsv.incident.2014$YEARQ
+
+#Put it all together into one dataframe
+#increase the memory limit with command: memory.limit(size=12003)
+gc()
+total.2014 <- merge(x = ncsv.household.2014, y = ncsv.person.2014,
+                    by = "key", all = TRUE)
+gc()
+total.2014 <- merge(x = total.2014, y = ncsv.incident.2014,
+                    by = "key", all = TRUE)
+
+#Prune extra columns away
+records.2014 <- subset(total.2014, select = c(V2014, V3017, V3019, V3020, V3023A, V3063, 
+                                              V2026, V2072, V4479))
+save(records.2014 ,file="r2014.Rda")
+gc()
 
 
 #V1000's for address variables, 
