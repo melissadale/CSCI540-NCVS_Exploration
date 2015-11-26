@@ -13,7 +13,7 @@ This script generates the R-Data files from the TSV files loaded in the "Obtaini
 
 *Notes:*
  * You should set the working directory at the top of the file to YOUR working directory path
- * Be aware of the <code>memory.limit(size=12003)</code> This helped with some memory allocation issues.
+ * Be aware of the <code>memory.limit(size=12003)</code> This helped with some memory allocation issues, but it may effect different machines in different ways. 
  * You can add, delete, or modify variables you want to investigate with the <code> vi </code> variable on line 24.
 
 
