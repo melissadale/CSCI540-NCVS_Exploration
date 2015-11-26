@@ -11,6 +11,11 @@ This is a project for CSCI540: Advanced Database at Montana State University. We
 **Data_Manager.R**
 This script generates the R-Data files from the TSV files loaded in the "Obtaining and Setting Up Dataset" section above. 
 
+*Notes:*
+ * You should set the working directory at the top of the file to YOUR working directory path
+ * Be aware of the <code>memory.limit(size=12003)</code> This helped with some memory allocation issues.
+ * You can add, delete, or modify variables you want to investigate with the <code> vi </code> variable on line 24.
+
 
 **Exploratory_Analysis.R**
 This script loads R-Data files and performs exploratory analysis on the data.  
