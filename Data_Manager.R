@@ -1,9 +1,9 @@
 
-#setwd("C:/users/Melissa/Documents/CSCI540-NCVS_Exploration/")
+setwd("C:/users/Melissa/Documents/CSCI540-NCVS_Exploration/")
 #Notes: Memory allocation was a problem at times, my work around was
 #  Use gc() (stands for garbage collector) frequently and increase memory
 #  with memory.limit(size=24006)
-memory.limit(size=24006) 
+memory.limit(size=12003) 
 
 ################################################################
 ####   reading in the Data for 2009, 2010, 2011, 
@@ -48,7 +48,7 @@ total.2009 <- merge(x = total.2009, y = ncsv.incident.2009,
 records.2009 <- subset(total.2009, select = vi)
 #Save to RData File
 save(records.2009,file="Data/r2009.Rda")
-gc()
+rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2010:http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/31202
@@ -74,7 +74,7 @@ total.2010 <- merge(x = total.2010, y = ncsv.incident.2010,
 records.2010 <- subset(total.2010, select = vi)
 
 save(records.2010,file="Data/r2010.Rda")
-gc()
+rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2011: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/34276
@@ -100,7 +100,7 @@ total.2011 <- merge(x = total.2011, y = ncsv.incident.2011,
 records.2011 <- subset(total.2011, select = vi)
 
 save(records.2011,file="Data/r2011.Rda")
-gc()
+rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2012: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/34650
@@ -127,7 +127,7 @@ total.2012 <- merge(x = total.2012, y = ncsv.incident.2012,
 
 records.2012 <- subset(total.2012, select = vi)
 save(records.2012 ,file="Data/r2012.Rda")
-gc()
+rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2013: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/35164
@@ -155,7 +155,7 @@ total.2013 <- merge(x = total.2013, y = ncsv.incident.2013,
 #Prune extra columns away
 records.2013 <- subset(total.2013, select = vi)
 save(records.2013 ,file="Data/r2013.Rda")
-gc()
+rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2014: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/36142
@@ -184,7 +184,7 @@ total.2014 <- merge(x = total.2014, y = ncsv.incident.2014,
 #Prune extra columns away
 records.2014 <- subset(total.2014, select = vi)
 save(records.2014 ,file="Data/r2014.Rda")
-gc()
+rm(list=setdiff(ls(), "vi"))
 
 #household income variables, gives codes that must be looked up
 #on pg 79 of Codebook
@@ -204,4 +204,3 @@ gc()
 #13 $50,000 to $74,999
 #14 $75,000 and over
 
-ncsv.household$V2026
