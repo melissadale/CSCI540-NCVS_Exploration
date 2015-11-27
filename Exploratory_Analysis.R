@@ -24,17 +24,31 @@ MILITARY <- c(records.2009$V3019[records.2009$V3019 < 8], records.2010$V3019[rec
               records.2013$V3019[records.2013$V3019 < 8], records.2014$V3019[records.2014$V3019 <8])
 MILITARY <- MILITARY[!is.na(MILITARY)]
 
-# TODO: education!!!
+# categorical
 EDUCATION <- c(records.2009$V3020[records.2009$V3020 < 98], records.2010$V3020[records.2010$V3020 < 98], 
                records.2011$V3020[records.2011$V3020 < 98], records.2012$V3020[records.2012$V3020 < 98], 
                records.2013$V3020[records.2013$V3020 < 98], records.2014$V3020[records.2014$V3020 < 98])
 EDUCATION <- EDUCATION[!is.na(EDUCATION)]
+# derived binary education variables
+# 1 = This is the highest degree of education received
+BELOW_HS <- ifelse((EDUCATION < 21) | (EDUCATION == 27), 1, 0)
+HS <- ifelse((EDUCATION == 28), 1, 0)
+HIGHER_ED <- ifelse((EDUCATION > 40), 1, 0)
 
 # TODO: race recode
 RACE <- c(records.2009$V3023A[records.2009$V3023A < 19], records.2010$V3023A[records.2010$V3023A < 19], 
           records.2011$V3023A[records.2011$V3023A < 19], records.2012$V3023A[records.2012$V3023A < 19], 
           records.2012$V3023A[records.2012$V3023A < 19], records.2013$V3023A[records.2013$V3023A < 19])
 RACE <- RACE[!is.na(RACE)]
+# derived binary race variables
+# note: may have to do just "white" (1 = White, 0 = Non-white)
+WHITE <- ifelse(RACE == 1, 1, 0)
+BLACK <- ifelse(RACE == 2, 1, 0)
+NATIVE <- ifelse(RACE == 3, 1, 0)
+ASIAN <- ifelse(RACE == 4, 1, 0)
+PACIFIC_ISLANDER <- ifelse(RACE == 5, 1, 0)
+MIXED_RACE <- ifelse((RACE > 5) & (RACE < 19), 1, 0)
+hist(RACE)
 
 # 1 = Yes, 2 = No
 SPOUSE_PRESENT <- c(records.2009$V3063[records.2009$V3063 < 8], records.2010$V3063[records.2010$V3063 < 8], 
