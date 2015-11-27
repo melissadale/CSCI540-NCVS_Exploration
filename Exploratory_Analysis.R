@@ -77,4 +77,5 @@ BF_GF_OFFENDER <- c(records.2009$V4522H[records.2009$V4522H < 8], records.2010$V
                     records.2013$V4522H[records.2013$V4522H < 8], records.2014$V4522H[records.2014$V4522H < 8]) 
 BF_GF_OFFENDER <- BF_GF_OFFENDER[!is.na(BF_GF_OFFENDER)]
 
-# todo: combine
+# 0 = No, 1 = Yes
+IPV <- ifelse((SPOUSE_OFFENDER > 0) | (EX_OFFENDER > 0) | (BF_GF_OFFENDER > 0), 1, 0)
