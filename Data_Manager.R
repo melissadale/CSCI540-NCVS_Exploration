@@ -16,7 +16,7 @@ memory.limit(size=12003)
 
 #Variables Investigating
 #===================
-#AGE (V2013), SEX(V3017), ARMED FORCE(V3019), EDUCATION(V3020), 
+#AGE (V3013), SEX(V3017), ARMED FORCE(V3019), EDUCATION(V3020), 
 #RACE(V3023A), SPOUSE(V3063), 
 #Household Income(v2026), Members Under 12(v2072)
 #Employment Status(V4479)
