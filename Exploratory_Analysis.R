@@ -18,13 +18,15 @@ GENDER <- c(records.2009$V3017[records.2009$V3017 < 3], records.2010$V3017[recor
             records.2013$V3017[records.2013$V3017 < 3], records.2014$V3017[records.2014$V3017 < 3])
 GENDER <- GENDER[!is.na(GENDER)]
 
-# 1 = Yes, 2 = No
+# original
 MILITARY <- c(records.2009$V3019[records.2009$V3019 < 8], records.2010$V3019[records.2010$V3019 < 8], 
               records.2011$V3019[records.2011$V3019 < 8], records.2012$V3019[records.2012$V3019 < 8], 
               records.2013$V3019[records.2013$V3019 < 8], records.2014$V3019[records.2014$V3019 <8])
 MILITARY <- MILITARY[!is.na(MILITARY)]
+# 1 = Yes, 0 = No
+MILITARY <- ifelse(MILITARY == 2, 0, 1)
 
-# categorical
+# education - categorical
 EDUCATION <- c(records.2009$V3020[records.2009$V3020 < 98], records.2010$V3020[records.2010$V3020 < 98], 
                records.2011$V3020[records.2011$V3020 < 98], records.2012$V3020[records.2012$V3020 < 98], 
                records.2013$V3020[records.2013$V3020 < 98], records.2014$V3020[records.2014$V3020 < 98])
@@ -35,7 +37,7 @@ BELOW_HS <- ifelse((EDUCATION < 21) | (EDUCATION == 27), 1, 0)
 HS <- ifelse((EDUCATION == 28), 1, 0)
 HIGHER_ED <- ifelse((EDUCATION > 40), 1, 0)
 
-# TODO: race recode
+# race recode - categorial
 RACE <- c(records.2009$V3023A[records.2009$V3023A < 19], records.2010$V3023A[records.2010$V3023A < 19], 
           records.2011$V3023A[records.2011$V3023A < 19], records.2012$V3023A[records.2012$V3023A < 19], 
           records.2012$V3023A[records.2012$V3023A < 19], records.2013$V3023A[records.2013$V3023A < 19])
@@ -50,7 +52,7 @@ PACIFIC_ISLANDER <- ifelse(RACE == 5, 1, 0)
 MIXED_RACE <- ifelse((RACE > 5) & (RACE < 19), 1, 0)
 hist(RACE)
 
-# 1 = Yes, 2 = No
+# 1 = Yes, 0 = No
 SPOUSE_PRESENT <- c(records.2009$V3063[records.2009$V3063 < 8], records.2010$V3063[records.2010$V3063 < 8], 
                     records.2011$V3063[records.2011$V3063 < 8], records.2012$V3063[records.2012$V3063 < 8], 
                     records.2013$V3063[records.2013$V3063 < 8], records.2014$V3063[records.2014$V3063 < 8])
@@ -68,10 +70,13 @@ HH_UNDER_12 <- c(records.2009$V2072, records.2010$V2072, records.2011$V2072, rec
 # binary, = 1 if there are any children in the household
 CHILDREN <- replace(HH_UNDER_12, HH_UNDER_12 > 0, 1)
 
-# 1 = Yes, 2 = No (employed at time of incident)
+# (employed at time of incident)
 EMPLOYED_AT_TIME <- c(records.2009$V4479, records.2010$V4479, records.2011$V4479, records.2012$V4479, 
                       records.2013$V4479, records.2014$V4479) 
 EMPLOYED_AT_TIME <- EMPLOYED_AT_TIME[!is.na(EMPLOYED_AT_TIME)]
+# 1 = Yes, 0 = No
+EMPLOYED_AT_TIME <- ifelse(EMPLOYED_AT_TIME == 2, 0, 1)
+
 
 # 0 = No, 1 = Yes (spouse was offender)
 SPOUSE_OFFENDER <- c(records.2009$V4513[records.2009$V4513 < 8], records.2010$V4513[records.2010$V4513 < 8], 
@@ -93,3 +98,4 @@ BF_GF_OFFENDER <- BF_GF_OFFENDER[!is.na(BF_GF_OFFENDER)]
 
 # 0 = No, 1 = Yes
 IPV <- ifelse((SPOUSE_OFFENDER > 0) | (EX_OFFENDER > 0) | (BF_GF_OFFENDER > 0), 1, 0)
+
