@@ -7,9 +7,9 @@ load("Data/r2013.Rda")
 load("Data/r2014.Rda")
 
 # number just corresponds to age, as long as they're under 98
-AGE <- c(records.2009$V2012[records.2009$V2012 < 98], records.2010$V2012[records.2010$V2012 < 98], 
-         records.2011$V2012[records.2011$V2012 < 98], records.2012$V2012[records.2012$V2012 < 98], 
-         records.2013$V2012[records.2013$V2012 < 98], records.2014$V2012[records.2014$V2012 < 98])
+AGE <- c(records.2009$V3013[records.2009$V3013 < 98], records.2010$V3013[records.2010$V3013 < 98], 
+         records.2011$V3013[records.2011$V3013 < 98], records.2012$V3013[records.2012$V3013 < 98], 
+         records.2013$V3013[records.2013$V3013 < 98], records.2014$V3013[records.2014$V3013 < 98])
 AGE <- AGE[!is.na(AGE)]
 
 # 1 = Male, 2 = Female
