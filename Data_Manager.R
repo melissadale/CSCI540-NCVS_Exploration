@@ -16,12 +16,12 @@ memory.limit(size=12003)
 
 #Variables Investigating
 #===================
-#AGE (V2013), SEX(V3017), ARMED FORCE(V3019), EDUCATION(V3020), 
+#AGE (V3013), SEX(V3017), ARMED FORCE(V3019), EDUCATION(V3020), 
 #RACE(V3023A), SPOUSE(V3063), 
 #Household Income(v2026), Members Under 12(v2072)
 #Employment Status(V4479)
 gc()
-vi <- c('V2013', 'V3017', 'V3019', 'V3020', 'V3023A', 'V3063', 
+vi <- c('V3013', 'V3017', 'V3019', 'V3020', 'V3023A', 'V3063', 
         'V2026', 'V2072', 'V4479', 'V4513', 'V4514', 'V4522H')
 
 ################################################################
