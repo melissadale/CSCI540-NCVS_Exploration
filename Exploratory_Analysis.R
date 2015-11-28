@@ -6,96 +6,82 @@ load("Data/r2012.Rda")
 load("Data/r2013.Rda")
 load("Data/r2014.Rda")
 
-# number just corresponds to age, as long as they're under 98
-AGE <- c(records.2009$V3013[records.2009$V3013 < 98], records.2010$V3013[records.2010$V3013 < 98], 
-         records.2011$V3013[records.2011$V3013 < 98], records.2012$V3013[records.2012$V3013 < 98], 
-         records.2013$V3013[records.2013$V3013 < 98], records.2014$V3013[records.2014$V3013 < 98])
-AGE <- AGE[!is.na(AGE)]
+# removes rows with NAs
+records.2009 <- na.omit(records.2009)
+records.2010 <- na.omit(records.2010)
+records.2011 <- na.omit(records.2011)
+records.2012 <- na.omit(records.2012)
+records.2013 <- na.omit(records.2013)
+records.2014 <- na.omit(records.2014)
+
+# combines into one data frame
+allYears <- rbind(records.2009, records.2010, records.2011, records.2012, records.2013)
+
+colnames(allYears) <- c('AGE', 'GENDER', 'MILITARY', 'EDUCATION', 'RACE', 'SPOUSE_PRESENT', 'INCOME', 
+                        'HH_UNDER_12', 'EMPLOYED_AT_TIME', 'SPOUSE_OFFENDER', 'EX_OFFENDER', 'BF_GF_OFFENDER')
+
+# number just corresponds to age as long as respondent is under 98
+allYears <- allYears[allYears$AGE < 98,]
 
 # 1 = Male, 2 = Female
-GENDER <- c(records.2009$V3017[records.2009$V3017 < 3], records.2010$V3017[records.2010$V3017 < 3], 
-            records.2011$V3017[records.2011$V3017 < 3], records.2012$V3017[records.2012$V3017 < 3], 
-            records.2013$V3017[records.2013$V3017 < 3], records.2014$V3017[records.2014$V3017 < 3])
-GENDER <- GENDER[!is.na(GENDER)]
+allYears <- allYears[allYears$GENDER < 3,]
 
-# original
-MILITARY <- c(records.2009$V3019[records.2009$V3019 < 8], records.2010$V3019[records.2010$V3019 < 8], 
-              records.2011$V3019[records.2011$V3019 < 8], records.2012$V3019[records.2012$V3019 < 8], 
-              records.2013$V3019[records.2013$V3019 < 8], records.2014$V3019[records.2014$V3019 <8])
-MILITARY <- MILITARY[!is.na(MILITARY)]
 # 1 = Yes, 0 = No
-MILITARY <- ifelse(MILITARY == 2, 0, 1)
+allYears <- allYears[allYears$MILITARY < 8,]
+allYears$MILITARY <- ifelse(allYears$MILITARY == 2, 0, 1)
 
 # education - categorical
-EDUCATION <- c(records.2009$V3020[records.2009$V3020 < 98], records.2010$V3020[records.2010$V3020 < 98], 
-               records.2011$V3020[records.2011$V3020 < 98], records.2012$V3020[records.2012$V3020 < 98], 
-               records.2013$V3020[records.2013$V3020 < 98], records.2014$V3020[records.2014$V3020 < 98])
-EDUCATION <- EDUCATION[!is.na(EDUCATION)]
+allYears <- allYears[allYears$EDUCATION < 98,]
+
 # derived binary education variables
 # 1 = This is the highest degree of education received
-BELOW_HS <- ifelse((EDUCATION < 21) | (EDUCATION == 27), 1, 0)
-HS <- ifelse((EDUCATION == 28), 1, 0)
-HIGHER_ED <- ifelse((EDUCATION > 40), 1, 0)
+allYears$BELOW_HS <- ifelse((allYears$EDUCATION < 21) | (allYears$EDUCATION == 27), 1, 0)
+allYears$HS <- ifelse((allYears$EDUCATION == 28), 1, 0)
+allYears$HIGHER_ED <- ifelse((allYears$EDUCATION > 40), 1, 0)
 
 # race recode - categorial
-RACE <- c(records.2009$V3023A[records.2009$V3023A < 19], records.2010$V3023A[records.2010$V3023A < 19], 
-          records.2011$V3023A[records.2011$V3023A < 19], records.2012$V3023A[records.2012$V3023A < 19], 
-          records.2012$V3023A[records.2012$V3023A < 19], records.2013$V3023A[records.2013$V3023A < 19])
-RACE <- RACE[!is.na(RACE)]
+allYears <- allYears[allYears$RACE < 19,]
+
 # derived binary race variables
 # note: may have to do just "white" (1 = White, 0 = Non-white)
-WHITE <- ifelse(RACE == 1, 1, 0)
-BLACK <- ifelse(RACE == 2, 1, 0)
-NATIVE <- ifelse(RACE == 3, 1, 0)
-ASIAN <- ifelse(RACE == 4, 1, 0)
-PACIFIC_ISLANDER <- ifelse(RACE == 5, 1, 0)
-MIXED_RACE <- ifelse((RACE > 5) & (RACE < 19), 1, 0)
-hist(RACE)
+allYears$WHITE <- ifelse(allYears$RACE == 1, 1, 0)
+allYears$BLACK <- ifelse(allYears$RACE == 2, 1, 0)
+allYears$NATIVE <- ifelse(allYears$RACE == 3, 1, 0)
+allYears$ASIAN <- ifelse(allYears$RACE == 4, 1, 0)
+allYears$PACIFIC_ISLANDER <- ifelse(allYears$RACE == 5, 1, 0)
+allYears$MIXED_RACE <- ifelse((allYears$RACE > 5) & (allYears$RACE < 19), 1, 0)
+hist(allYears$RACE)
 
 # 1 = Yes, 0 = No
-SPOUSE_PRESENT <- c(records.2009$V3063[records.2009$V3063 < 8], records.2010$V3063[records.2010$V3063 < 8], 
-                    records.2011$V3063[records.2011$V3063 < 8], records.2012$V3063[records.2012$V3063 < 8], 
-                    records.2013$V3063[records.2013$V3063 < 8], records.2014$V3063[records.2014$V3063 < 8])
-SPOUSE_PRESENT <- c(SPOUSE_PRESENT[!is.na(SPOUSE_PRESENT)])
+allYears <- allYears[allYears$SPOUSE_PRESENT < 8,]
 
 # increments from 1 (< $5,000) to 14 (> $75,000)
-INCOME <- c(records.2009$V2026[records.2009$V2026 < 98], records.2010$V2026[records.2010$V2026 < 98], 
-            records.2011$V2026[records.2011$V2026 < 98], records.2012$V2026[records.2012$V2026 < 98], 
-            records.2013$V2026[records.2013$V2026 < 98], records.2014$V2026[records.2014$V2026 < 98]) 
-INCOME <- INCOME[!is.na(INCOME)]
+allYears <- allYears[allYears$INCOME < 98,]
+hist(allYears$INCOME)
 
-# number of household members under 12
-HH_UNDER_12 <- c(records.2009$V2072, records.2010$V2072, records.2011$V2072, records.2012$V2072, 
-            records.2013$V2072, records.2014$V2072) 
+# categorial income vars (note: do not cover full spectrum of answers, only extremes!)
+allYears$HIGH_INCOME <- ifelse(allYears$INCOME == 14, 1, 0)
+allYears$LOW_INCOME <- ifelse(allYears$INCOME < 8, 1, 0)
+
+
+# derived binary var from HH_Under_12
 # binary, = 1 if there are any children in the household
-CHILDREN <- replace(HH_UNDER_12, HH_UNDER_12 > 0, 1)
+allYears$CHILDREN <- ifelse(allYears$HH_UNDER_12 > 0, 1, 0)
 
 # (employed at time of incident)
-EMPLOYED_AT_TIME <- c(records.2009$V4479, records.2010$V4479, records.2011$V4479, records.2012$V4479, 
-                      records.2013$V4479, records.2014$V4479) 
-EMPLOYED_AT_TIME <- EMPLOYED_AT_TIME[!is.na(EMPLOYED_AT_TIME)]
 # 1 = Yes, 0 = No
-EMPLOYED_AT_TIME <- ifelse(EMPLOYED_AT_TIME == 2, 0, 1)
+allYears$EMPLOYED_AT_TIME <- ifelse(allYears$EMPLOYED_AT_TIME == 2, 0, 1)
 
 
 # 0 = No, 1 = Yes (spouse was offender)
-SPOUSE_OFFENDER <- c(records.2009$V4513[records.2009$V4513 < 8], records.2010$V4513[records.2010$V4513 < 8], 
-                     records.2011$V4513[records.2011$V4513 < 8], records.2012$V4513[records.2012$V4513 < 8], 
-                     records.2013$V4513[records.2013$V4513 < 8], records.2014$V4513[records.2014$V4513 < 8]) 
-SPOUSE_OFFENDER <- SPOUSE_OFFENDER[!is.na(SPOUSE_OFFENDER)]
+allYears <- allYears[allYears$SPOUSE_OFFENDER < 8,]
 
 # 0 = No, 1 = Yes
-EX_OFFENDER <- c(records.2009$V4514[records.2009$V4514 < 8], records.2010$V4514[records.2010$V4514 < 8], 
-                 records.2011$V4514[records.2011$V4514 < 8], records.2012$V4514[records.2012$V4514 < 8], 
-                 records.2013$V4514[records.2013$V4514 < 8], records.2014$V4514[records.2014$V4514 < 8]) 
-EX_OFFENDER <- EX_OFFENDER[!is.na(EX_OFFENDER)]
+allYears <- allYears[allYears$EX_OFFENDER < 8,]
   
 # 0 = No, 1 = Yes
-BF_GF_OFFENDER <- c(records.2009$V4522H[records.2009$V4522H < 8], records.2010$V4522H[records.2010$V4522H < 8], 
-                    records.2011$V4522H[records.2011$V4522H < 8], records.2012$V4522H[records.2012$V4522H < 8], 
-                    records.2013$V4522H[records.2013$V4522H < 8], records.2014$V4522H[records.2014$V4522H < 8]) 
-BF_GF_OFFENDER <- BF_GF_OFFENDER[!is.na(BF_GF_OFFENDER)]
+allYears <- allYears[allYears$BF_GF_OFFENDER < 8,]
 
 # 0 = No, 1 = Yes
-IPV <- ifelse((SPOUSE_OFFENDER > 0) | (EX_OFFENDER > 0) | (BF_GF_OFFENDER > 0), 1, 0)
+allYears$IPV <- ifelse((allYears$SPOUSE_OFFENDER > 0) | (allYears$EX_OFFENDER > 0) | (allYears$BF_GF_OFFENDER > 0), 1, 0)
 
