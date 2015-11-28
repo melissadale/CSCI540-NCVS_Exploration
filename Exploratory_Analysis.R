@@ -85,12 +85,17 @@ allYears <- allYears[allYears$BF_GF_OFFENDER < 8,]
 # 0 = No, 1 = Yes
 allYears$IPV <- ifelse((allYears$SPOUSE_OFFENDER > 0) | (allYears$EX_OFFENDER > 0) | (allYears$BF_GF_OFFENDER > 0), 1, 0)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 # first probit model
 initial_probit <- glm(IPV ~ AGE +  MILITARY + EMPLOYED_AT_TIME + WHITE + SPOUSE_PRESENT + BELOW_HS + HS + HIGHER_ED + 
                         HIGH_INCOME + LOW_INCOME + CHILDREN, family=binomial(link="probit"), data = allYears)
 summary(initial_probit)
 
 womensData <- allYears[allYears$GENDER == 2,]
+<<<<<<< HEAD
 mensData <- allYears[allYears$GENDER == 1,]
 
 #gender-specific probits
@@ -100,3 +105,22 @@ women_probit <- glm(IPV ~ AGE +  MILITARY + EMPLOYED_AT_TIME + WHITE + SPOUSE_PR
                       HIGH_INCOME + LOW_INCOME + CHILDREN, family=binomial(link="probit"), data = womensData)
 summary(men_probit)
 summary(women_probit)
+=======
+labels <- c("Reported no IPV", "Reported IPV")
+colors <- c("darkslategray2", "darkolivegreen1")
+w_IPV_freq = table(womensData$IPV)
+pie3D(w_IPV_freq, labels = labels, main = "Percentage of Women Reporting IPV", col = colors)
+
+mensData <- allYears[allYears$GENDER == 1,]
+m_IPV_freq = table(mensData$IPV)
+pie3D(m_IPV_freq, labels = labels, main = "Percentage of Men Reporting IPV", col = colors)
+
+# gender-specific probits
+men_probit <- glm(IPV ~ AGE +  MILITARY + EMPLOYED_AT_TIME + WHITE + SPOUSE_PRESENT + BELOW_HS + HS + HIGHER_ED + 
+                    HIGH_INCOME + LOW_INCOME + CHILDREN, family=binomial(link="probit"), data = mensData)
+women_probit <- glm(IPV ~ AGE +  MILITARY + EMPLOYED_AT_TIME + WHITE + SPOUSE_PRESENT + BELOW_HS + HS + HIGHER_ED + 
+                    HIGH_INCOME + LOW_INCOME + CHILDREN, family=binomial(link="probit"), data = womensData)
+summary(men_probit)
+summary(women_probit)
+
+>>>>>>> dev
