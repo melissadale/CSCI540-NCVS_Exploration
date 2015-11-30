@@ -111,27 +111,27 @@ ggplot(IPV.Records, aes(x=INCOME)) +
 p9 <- list(ggplot(IPV.2009, aes(x=INCOME)) + 
              geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
              scale_fill_gradient("Count", low = "mediumorchid1", high = "darkorchid4") +
-             labs(title="Ages 2009"))
+             labs(title="Income 2009"))
 p10 <- list(ggplot(IPV.2010, aes(x=INCOME)) + 
               geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
               scale_fill_gradient("Count", low = "mediumorchid1", high = "darkorchid4") +
-              labs(title="Ages 2010"))
+              labs(title="Income 2010"))
 p11 <- list(ggplot(IPV.2011, aes(x=INCOME)) + 
               geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
               scale_fill_gradient("Count", low = "mediumorchid1", high = "darkorchid4") +
-              labs(title="Ages 2011"))
+              labs(title="Income 2011"))
 p12 <- list(ggplot(IPV.2012, aes(x=INCOME)) + 
               geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
               scale_fill_gradient("Count", low = "mediumorchid1", high = "darkorchid4") +
-              labs(title="Ages 2012"))
+              labs(title="Income 2012"))
 p13 <- list(ggplot(IPV.2013, aes(x=INCOME)) + 
               geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
               scale_fill_gradient("Count", low = "mediumorchid1", high = "darkorchid4") +
-              labs(title="Ages 2013"))
+              labs(title="Income 2013"))
 p14 <- list(ggplot(IPV.2014, aes(x=INCOME)) + 
               geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
               scale_fill_gradient("Count", low = "mediumorchid1", high = "darkorchid4") +
-              labs(title="Ages 2014"))
+              labs(title="Income 2014"))
 
 do.call(grid.arrange, c(p9, p10,p11,p12,p13,p14, 
                         list(ncol=2)))
