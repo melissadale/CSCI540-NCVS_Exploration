@@ -53,7 +53,7 @@ records.2014$IPV <- ifelse((records.2014$SPOUSE_OFFENDER > 0) | (records.2014$EX
 total <- rbind(records.2009, records.2010, records.2011, records.2012, records.2013, records.2014)
 
 #Pull IPV to their own record
-IPV.Records <- subset(total, total$IPV == 1)
+IPV.Records <- subset(allYears, allYears$IPV == 1)
 IPV.2009 <- subset(records.2009, records.2009$IPV == 1)
 IPV.2010 <- subset(records.2010, records.2010$IPV == 1)
 IPV.2011 <- subset(records.2011, records.2011$IPV == 1)
@@ -102,7 +102,7 @@ p14 <- list(ggplot(IPV.2014, aes(x=AGE)) +
 do.call(grid.arrange, c(p9, p10,p11,p12,p13,p14, 
                         list(ncol=2)))
 
-###############INCOME breaks=seq(1, 14, by = 0.8),
+###############INCOME 
 ggplot(IPV.Records, aes(x=INCOME)) + 
   geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
   scale_fill_gradient("Count", low = "mediumorchid1", high = "darkorchid4") +
@@ -137,3 +137,70 @@ do.call(grid.arrange, c(p9, p10,p11,p12,p13,p14,
                         list(ncol=2)))
 
 
+###############RACE
+ggplot(allYears, aes(x=RACE)) + 
+  geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
+  scale_fill_gradient("Count", low = "springgreen", high = "springgreen4") +
+  labs(title="Histogram of IPV RACE Levels") 
+
+p9 <- list(ggplot(IPV.2009, aes(x=RACE)) + 
+             geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
+             scale_fill_gradient("Count", low = "springgreen", high = "springgreen4") +
+             labs(title="RACE 2009"))
+p10 <- list(ggplot(IPV.2010, aes(x=RACE)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
+              scale_fill_gradient("Count", low = "springgreen", high = "springgreen4") +
+              labs(title="RACE 2010"))
+p11 <- list(ggplot(IPV.2011, aes(x=RACE)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
+              scale_fill_gradient("Count", low = "springgreen", high = "springgreen4") +
+              labs(title="RACE 2011"))
+p12 <- list(ggplot(IPV.2012, aes(x=RACE)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
+              scale_fill_gradient("Count", low = "springgreen", high = "springgreen4") +
+              labs(title="RACE 2012"))
+p13 <- list(ggplot(IPV.2013, aes(x=RACE)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
+              scale_fill_gradient("Count", low = "springgreen", high = "springgreen4") +
+              labs(title="RACE 2013"))
+p14 <- list(ggplot(IPV.2014, aes(x=RACE)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(1, 15)) + 
+              scale_fill_gradient("Count", low = "springgreen", high = "springgreen4") +
+              labs(title="RACE 2014"))
+
+do.call(grid.arrange, c(p9, p10,p11,p12,p13,p14, 
+                        list(ncol=2)))
+
+###############EDUCATION
+ggplot(allYears, aes(x=EDUCATION)) + 
+  geom_histogram(aes(fill=..count..), breaks=seq(4, 12)) + 
+  scale_fill_gradient("Count", low = "red", high = "red4") +
+  labs(title="Histogram of IPV EDUCATION Levels") 
+
+p9 <- list(ggplot(IPV.2009, aes(x=EDUCATION)) + 
+             geom_histogram(aes(fill=..count..), breaks=seq(4,12)) + 
+             scale_fill_gradient("Count", low = "red", high = "red4") +
+             labs(title="EDUCATION 2009"))
+p10 <- list(ggplot(IPV.2010, aes(x=EDUCATION)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(4,12)) + 
+              scale_fill_gradient("Count", low = "red", high = "red4") +
+              labs(title="EDUCATION 2010"))
+p11 <- list(ggplot(IPV.2011, aes(x=EDUCATION)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(4,12)) + 
+              scale_fill_gradient("Count", low = "red", high = "red4") +
+              labs(title="EDUCATION 2011"))
+p12 <- list(ggplot(IPV.2012, aes(x=EDUCATION)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(4,12)) + 
+              scale_fill_gradient("Count", low = "red", high = "red4") +
+              labs(title="EDUCATION 2012"))
+p13 <- list(ggplot(IPV.2013, aes(x=EDUCATION)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(4,12)) + 
+              scale_fill_gradient("Count", low = "red", high = "red4") +
+              labs(title="EDUCATION 2013"))
+p14 <- list(ggplot(IPV.2014, aes(x=EDUCATION)) + 
+              geom_histogram(aes(fill=..count..), breaks=seq(4,12)) + 
+              scale_fill_gradient("Count", low = "red", high = "red4") +
+              labs(title="EDUCATION 2014"))
+
+do.call(grid.arrange, c(p9, p10,p11,p12,p13,p14, 
+                        list(ncol=2)))
