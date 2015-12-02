@@ -17,9 +17,15 @@ This script generates the R-Data files from the TSV files loaded in the "Obtaini
  * You can add, delete, or modify variables you want to investigate with the <code> vi </code> variable on line 24.
 
 
-**Exploratory_Analysis.R**
-This script loads R-Data files and performs exploratory analysis on the data.  
+**Data_Manager_Custom.R**
+This script loads R-Data files, loads the workspace with releveat variables for statistical analysis, and generates some plots of the data distributions for each year, as well as the combination of all 6 years.  
 
+
+**Probit.R**
+This script performs and assesses probit analysis on the dataset.
+
+**MachineLearning.R**
+This script uses the caret package to assess Naives Bayes, Decision Tree, and K Nearest Neighbor models of the dataset.  
 
 **IPV.R**
 This script loads R-Data files and performs model analysis on the data.  
