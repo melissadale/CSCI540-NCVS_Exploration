@@ -1,8 +1,19 @@
+#setwd("C:/users/Melissa/Documents/CSCI540-NCVS_Exploration/")
 
-setwd("C:/users/Melissa/Documents/CSCI540-NCVS_Exploration/")
-#Notes: Memory allocation was a problem at times, my work around was
-#  Use gc() (stands for garbage collector) frequently and increase memory
-#  with memory.limit(size=24006)
+#Output: rdata files for each year in 2009 - 2014 
+#   with specified variables from the NCVS 
+
+#To use or modify:
+#   vi: this variable is the list containing "variables investigating", 
+#   if you want to generate rdata files with different variables
+#   ONLY MODIFY this list, the script will handle the rest
+
+
+#Notes: Memory allocation was problematic at times, 
+#   work arounds: frequently use garbage collector - gc(),
+#   clear the workspace after each year (except for vi list),
+#   increase the memory.limit
+
 memory.limit(size=12003) 
 
 ################################################################
@@ -14,7 +25,7 @@ memory.limit(size=12003)
 #V3000's for person variables, 
 #V4000's for incident variables
 
-#Variables Investigating
+#Variables Investigating 
 #===================
 #AGE (V3013), SEX(V3017), ARMED FORCE(V3019), EDUCATION(V3020), 
 #RACE(V3023A), SPOUSE(V3063), 
@@ -185,22 +196,3 @@ total.2014 <- merge(x = total.2014, y = ncsv.incident.2014,
 records.2014 <- subset(total.2014, select = vi)
 save(records.2014 ,file="Data/r2014.Rda")
 rm(list=setdiff(ls(), "vi"))
-
-#household income variables, gives codes that must be looked up
-#on pg 79 of Codebook
-#income level
-#01 Less than $5,000
-#02 $5,000 to $7,499
-#03 $7,500 to $9,999
-#04 $10,000 to $12,499
-#05 $12,500 to $14,999
-#06 $15,000 to $17,499
-#07 $17,500 to $19,999
-#08 $20,000 to $24,999
-#09 $25,000 to $29,999
-#10 $30,000 to $34,999
-#11 $35,000 to $39,999
-#12 $40,000 to $49,999
-#13 $50,000 to $74,999
-#14 $75,000 and over
-

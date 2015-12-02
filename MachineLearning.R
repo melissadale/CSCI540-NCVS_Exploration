@@ -22,6 +22,7 @@ labels.train <- allYears[indx,]$IPV
 
 testIPV <-(allYears[-indx,])
 labels.train <- allYears[-indx,]$IPV
+
 ######################################################
 ###         Naive Bayes
 ######################################################
@@ -29,7 +30,7 @@ labels.train <- allYears[-indx,]$IPV
 #Using Cross validation, set up train_control
 train_control <- trainControl(method = 'cv', number = 10)
 #use naive bayes
-model <- train(IPV.model, data = allYears, trControl = train_control, method = 'nb')
+model <- train(IPV.model, data = trainIPV, trControl = train_control, method = 'nb')
 model$bestTune
 predictions <- predict(model, testIPV)
 
@@ -43,14 +44,14 @@ confusionMatrix(predictions, testIPV$IPV)
 #Using Cross validation, set up train_control
 train_control <- trainControl(method = 'cv', number = 10)
 #use Decision Tree
-model <- train(IPV.model, data = allYears, trControl = train_control, method = 'rpart')
+model <- train(IPV.model, data = trainIPV, trControl = train_control, method = 'rpart')
 model$bestTune
 
 predictions <- predict(model, testIPV)
 #plot
-library(rpart.plot)
 plot(model$finalModel, margin = 0.2, uniform = TRUE)
 text(model$finalModel, use.n = TRUE, cex = .7)
+
 #check accuracy-K-fold Cross Validation
 confusionMatrix(predictions, testIPV$IPV)
 
@@ -60,8 +61,8 @@ confusionMatrix(predictions, testIPV$IPV)
 #Using Cross validation, set up train_control
 train_control <- trainControl(method = 'cv', number = 10)
 #use naive bayes
-model <- train(IPV.model, data = allYears, trControl = train_control,
-               method = 'knn')
+model <- train(IPV.model, data = trainIPV, trControl = train_control,
+               method = 'kknn')
 model$bestTune
 predictions <- predict(model, testIPV)
 
