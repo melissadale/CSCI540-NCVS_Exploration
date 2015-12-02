@@ -27,5 +27,3 @@ This script performs and assesses probit analysis on the dataset.
 **MachineLearning.R**
 This script uses the caret package to assess Naives Bayes, Decision Tree, and K Nearest Neighbor models of the dataset.  
 
-**IPV.R**
-This script loads R-Data files and performs model analysis on the data.  
