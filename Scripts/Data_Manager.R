@@ -1,5 +1,3 @@
-#setwd("C:/users/Melissa/Documents/CSCI540-NCVS_Exploration/")
-
 #Output: rdata files for each year in 2009 - 2014 
 #   with specified variables from the NCVS 
 
@@ -38,11 +36,11 @@ vi <- c('V3013', 'V3017', 'V3019', 'V3020', 'V3023A', 'V3063',
 ################################################################
 ###2009: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/28543
 #=======
-#ncsv.address.2009 <- read.delim('Data/2009/28543-0001-Data.tsv')
-ncsv.household.2009 <- read.delim('Data/2009/28543-0002-Data.tsv')
-ncsv.person.2009 <- read.delim('Data/2009/28543-0003-Data.tsv')
-ncsv.incident.2009 <- read.delim('Data/2009/28543-0004-Data.tsv')
-#ncsv.level.2009 <- read.delim('Data/2009/28543-0005-Data.tsv')
+ncsv.address.2009 <- read.delim('../Data/2009/28543-0001-Data.tsv')
+ncsv.household.2009 <- read.delim('../Data/2009/28543-0002-Data.tsv')
+ncsv.person.2009 <- read.delim('../Data/2009/28543-0003-Data.tsv')
+ncsv.incident.2009 <- read.delim('../Data/2009/28543-0004-Data.tsv')
+ncsv.level.2009 <- read.delim('../Data/2009/28543-0005-Data.tsv')
 
 #link together, unique identifier across records on IDHH and YEARQ
 #Create Unique Identifiers
@@ -57,17 +55,18 @@ total.2009 <- merge(x = total.2009, y = ncsv.incident.2009,
                     by = "key", all = TRUE)
 #Prune extra columns away
 records.2009 <- subset(total.2009, select = vi)
+
 #Save to RData File
-save(records.2009,file="Data/r2009.Rda")
+save(records.2009,file="../Data/r2009.Rda")
 rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2010:http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/31202
-#ncsv.address.2010 <- read.delim('Data/2010/31202-0001-Data.tsv')
-ncsv.household.2010 <- read.delim('Data/2010/31202-0002-Data.tsv')
-ncsv.person.2010 <- read.delim('Data/2010/31202-0003-Data.tsv')
-ncsv.incident.2010 <- read.delim('Data/2010/31202-0004-Data.tsv')
-#ncsv.level.2010 <- read.delim('Data/2010/31202-0005-Data.tsv')
+#ncsv.address.2010 <- read.delim('../Data/2010/31202-0001-Data.tsv')
+ncsv.household.2010 <- read.delim('../Data/2010/31202-0002-Data.tsv')
+ncsv.person.2010 <- read.delim('../Data/2010/31202-0003-Data.tsv')
+ncsv.incident.2010 <- read.delim('../Data/2010/31202-0004-Data.tsv')
+ncsv.level.2010 <- read.delim('../Data/2010/31202-0005-Data.tsv')
 
 #link together, unique identifier across records on IDHH and YEARQ
 #Create Unique Identifiers
@@ -84,16 +83,16 @@ total.2010 <- merge(x = total.2010, y = ncsv.incident.2010,
 #Prune extra columns away
 records.2010 <- subset(total.2010, select = vi)
 
-save(records.2010,file="Data/r2010.Rda")
+save(records.2010,file="../Data/r2010.Rda")
 rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2011: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/34276
-#ncsv.address.2011 <- read.delim('Data/2011/34061-0001-Data.tsv')
-ncsv.household.2011 <- read.delim('Data/2011/34061-0002-Data.tsv')
-ncsv.person.2011 <- read.delim('Data/2011/34061-0003-Data.tsv')
-ncsv.incident.2011 <- read.delim('Data/2011/34061-0004-Data.tsv')
-#ncsv.level.2011 <- read.delim('Data/2011/34061-0005-Data.tsv')
+#ncsv.address.2011 <- read.delim('../Data/2011/34061-0001-Data.tsv')
+ncsv.household.2011 <- read.delim('../Data/2011/34061-0002-Data.tsv')
+ncsv.person.2011 <- read.delim('../Data/2011/34061-0003-Data.tsv')
+ncsv.incident.2011 <- read.delim('../Data/2011/34061-0004-Data.tsv')
+ncsv.level.2011 <- read.delim('../Data/2011/34061-0005-Data.tsv')
 
 #link together, unique identifier across records on IDHH and YEARQ
 #Create Unique Identifiers
@@ -110,16 +109,16 @@ total.2011 <- merge(x = total.2011, y = ncsv.incident.2011,
 #Prune extra columns away
 records.2011 <- subset(total.2011, select = vi)
 
-save(records.2011,file="Data/r2011.Rda")
+save(records.2011,file="../Data/r2011.Rda")
 rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2012: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/34650
-#ncsv.address.2012 <- read.delim('Data/2012/34650-0001-Data.tsv')
-ncsv.household.2012 <- read.delim('Data/2012/34650-0002-Data.tsv')
-ncsv.person.2012 <- read.delim('Data/2012/34650-0003-Data.tsv')
-ncsv.incident.2012 <- read.delim('Data/2012/34650-0004-Data.tsv')
-#ncsv.level.2012 <- read.delim('Data/2012/34650-0005-Data.tsv')
+ncsv.address.2012 <- read.delim('../Data/2012/34650-0001-Data.tsv')
+ncsv.household.2012 <- read.delim('../Data/2012/34650-0002-Data.tsv')
+ncsv.person.2012 <- read.delim('../Data/2012/34650-0003-Data.tsv')
+ncsv.incident.2012 <- read.delim('../Data/2012/34650-0004-Data.tsv')
+ncsv.level.2012 <- read.delim('../Data/2012/34650-0005-Data.tsv')
 gc()
 
 #link together, unique identifier across records on IDHH and YEARQ
@@ -137,16 +136,16 @@ total.2012 <- merge(x = total.2012, y = ncsv.incident.2012,
                     by = "key", all = TRUE)
 
 records.2012 <- subset(total.2012, select = vi)
-save(records.2012 ,file="Data/r2012.Rda")
+save(records.2012 ,file="../Data/r2012.Rda")
 rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2013: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/35164
-#ncsv.address.2013 <- read.delim('Data/2013/35164-0001-Data.tsv')
-ncsv.household.2013 <- read.delim('Data/2013/35164-0002-Data.tsv')
-ncsv.person.2013 <- read.delim('Data/2013/35164-0003-Data.tsv')
-ncsv.incident.2013 <- read.delim('Data/2013/35164-0004-Data.tsv')
-#ncsv.level.2013 <- read.delim('Data/2013/35164-0005-Data.tsv')
+ncsv.address.2013 <- read.delim('../Data/2013/35164-0001-Data.tsv')
+ncsv.household.2013 <- read.delim('../Data/2013/35164-0002-Data.tsv')
+ncsv.person.2013 <- read.delim('../Data/2013/35164-0003-Data.tsv')
+ncsv.incident.2013 <- read.delim('../Data/2013/35164-0004-Data.tsv')
+ncsv.level.2013 <- read.delim('../Data/2013/35164-0005-Data.tsv')
 gc()
 
 #link together, unique identifier across records on IDHH and YEARQ
@@ -165,16 +164,16 @@ total.2013 <- merge(x = total.2013, y = ncsv.incident.2013,
 
 #Prune extra columns away
 records.2013 <- subset(total.2013, select = vi)
-save(records.2013 ,file="Data/r2013.Rda")
+save(records.2013 ,file="../Data/r2013.Rda")
 rm(list=setdiff(ls(), "vi"))
 
 ################################################################
 #2014: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/36142
-#ncsv.address.2014 <- read.delim('Data/2014/36142-0001-Data.tsv')
-ncsv.household.2014 <- read.delim('Data/2014/36142-0002-Data.tsv')
-ncsv.person.2014 <- read.delim('Data/2014/36142-0003-Data.tsv')
-ncsv.incident.2014 <- read.delim('Data/2014/36142-0004-Data.tsv')
-#ncsv.level.2014 <- read.delim('Data/2014/36142-0005-Data.tsv')
+ncsv.address.2014 <- read.delim('../Data/2014/36142-0001-Data.tsv')
+ncsv.household.2014 <- read.delim('../Data/2014/36142-0002-Data.tsv')
+ncsv.person.2014 <- read.delim('../Data/2014/36142-0003-Data.tsv')
+ncsv.incident.2014 <- read.delim('../Data/2014/36142-0004-Data.tsv')
+ncsv.level.2014 <- read.delim('../Data/2014/36142-0005-Data.tsv')
 gc()
 
 #link together, unique identifier across records on IDHH and YEARQ
@@ -194,5 +193,5 @@ total.2014 <- merge(x = total.2014, y = ncsv.incident.2014,
 
 #Prune extra columns away
 records.2014 <- subset(total.2014, select = vi)
-save(records.2014 ,file="Data/r2014.Rda")
+save(records.2014 ,file="../Data/r2014.Rda")
 rm(list=setdiff(ls(), "vi"))
