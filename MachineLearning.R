@@ -68,3 +68,18 @@ predictions <- predict(model, testIPV)
 
 #check accuracy-K-fold Cross Validation
 confusionMatrix(predictions, testIPV$IPV)
+
+
+######################################################
+###       neural net
+######################################################
+#Using Cross validation, set up train_control
+train_control <- trainControl(method = 'cv', number = 10)
+#use naive bayes
+model <- train(IPV.model, data = trainIPV, trControl = train_control,
+               method = 'nnet')
+model$bestTune
+predictions <- predict(model, testIPV)
+
+#check accuracy-K-fold Cross Validation
+confusionMatrix(predictions, testIPV$IPV)
