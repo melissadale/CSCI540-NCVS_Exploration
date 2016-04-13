@@ -5,12 +5,12 @@
 #######################################
 
 #read in data
-load("Data/r2009.Rda")
-load("Data/r2010.Rda")
-load("Data/r2011.Rda")
-load("Data/r2012.Rda")
-load("Data/r2013.Rda")
-load("Data/r2014.Rda")
+load("../Data/r2009.Rda")
+load("../Data/r2010.Rda")
+load("../Data/r2011.Rda")
+load("../Data/r2012.Rda")
+load("../Data/r2013.Rda")
+load("../Data/r2014.Rda")
 
 # removes rows with NAs
 records.2009 <- na.omit(records.2009)
@@ -21,10 +21,10 @@ records.2013 <- na.omit(records.2013)
 records.2014 <- na.omit(records.2014)
 
 # combines into one data frame
-allYears <- rbind(records.2009, records.2010, records.2011, records.2012, records.2013)
+allYears <- rbind(records.2009, records.2010, records.2011, records.2012, records.2013, records.2014)
 
 colnames(allYears) <- c('AGE', 'GENDER', 'MILITARY', 'EDUCATION', 'RACE', 'SPOUSE_PRESENT', 'INCOME', 
-                        'HH_UNDER_12', 'EMPLOYED_AT_TIME', 'SPOUSE_OFFENDER', 'EX_OFFENDER', 'BF_GF_OFFENDER')
+                        'HH_UNDER_12', 'EMPLOYED_AT_TIME', 'SPOUSE_OFFENDER', 'EX_OFFENDER', 'BF_GF_OFFENDER', "YEAR")
 
 # number just corresponds to age as long as respondent is under 98
 allYears <- allYears[allYears$AGE < 98,]
@@ -88,7 +88,7 @@ allYears <- allYears[allYears$BF_GF_OFFENDER < 8,]
 
 # 0 = No, 1 = Yes
 allYears$IPV <- ifelse((allYears$SPOUSE_OFFENDER > 0) | (allYears$EX_OFFENDER > 0) | (allYears$BF_GF_OFFENDER > 0), 1, 0)
-
+IPV.Records <- allYears[allYears$IPV == 1,]
 
 ### PLOT SOME DISTRIBUTIONS OF DATASET
 library(ggplot2)
