@@ -31,7 +31,7 @@ memory.limit(size=12003)
 #Employment Status(V4479)
 gc()
 vi <- c('V3013', 'V3017', 'V3019', 'V3020', 'V3023A', 'V3063', 
-        'V2026', 'V2072', 'V4479', 'V4513', 'V4514', 'V4522H')
+        'V2026', 'V2072', 'V4479', 'V4513', 'V4514', 'V4522H', 'year')
 
 ################################################################
 ###2009: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/28543
@@ -54,7 +54,9 @@ total.2009 <- merge(x = ncsv.household.2009, y = ncsv.person.2009,
 total.2009 <- merge(x = total.2009, y = ncsv.incident.2009,
                     by = "key", all = TRUE)
 #Prune extra columns away
+total.2009$year <- 'y2009'
 records.2009 <- subset(total.2009, select = vi)
+
 
 #Save to RData File
 save(records.2009,file="../Data/r2009.Rda")
@@ -81,13 +83,14 @@ total.2010 <- merge(x = total.2010, y = ncsv.incident.2010,
                     by = "key", all = TRUE)
 
 #Prune extra columns away
+total.2010$year <- 'y2010'
 records.2010 <- subset(total.2010, select = vi)
 
 save(records.2010,file="../Data/r2010.Rda")
 rm(list=setdiff(ls(), "vi"))
 
 ################################################################
-#2011: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/34276
+#2011: http://www.icpsr.umich.edu/icpsrweb/NACJD/studies/34061
 #ncsv.address.2011 <- read.delim('../Data/2011/34061-0001-Data.tsv')
 ncsv.household.2011 <- read.delim('../Data/2011/34061-0002-Data.tsv')
 ncsv.person.2011 <- read.delim('../Data/2011/34061-0003-Data.tsv')
@@ -105,7 +108,7 @@ total.2011 <- merge(x = ncsv.household.2011, y = ncsv.person.2011,
                     by = "key", all = TRUE)
 total.2011 <- merge(x = total.2011, y = ncsv.incident.2011,
                     by = "key", all = TRUE)
-
+total.2011$year <- 'y2011'
 #Prune extra columns away
 records.2011 <- subset(total.2011, select = vi)
 
@@ -134,8 +137,10 @@ total.2012 <- merge(x = ncsv.household.2012, y = ncsv.person.2012,
                     by = "key", all = TRUE)
 total.2012 <- merge(x = total.2012, y = ncsv.incident.2012,
                     by = "key", all = TRUE)
+total.2012$year <- 'y2012'
 
 records.2012 <- subset(total.2012, select = vi)
+
 save(records.2012 ,file="../Data/r2012.Rda")
 rm(list=setdiff(ls(), "vi"))
 
@@ -161,6 +166,7 @@ total.2013 <- merge(x = ncsv.household.2013, y = ncsv.person.2013,
                     by = "key", all = TRUE)
 total.2013 <- merge(x = total.2013, y = ncsv.incident.2013,
                     by = "key", all = TRUE)
+total.2013$year <- 'y2013'
 
 #Prune extra columns away
 records.2013 <- subset(total.2013, select = vi)
@@ -190,6 +196,7 @@ total.2014 <- merge(x = ncsv.household.2014, y = ncsv.person.2014,
 gc()
 total.2014 <- merge(x = total.2014, y = ncsv.incident.2014,
                     by = "key", all = TRUE)
+total.2014$year <- 'y2014'
 
 #Prune extra columns away
 records.2014 <- subset(total.2014, select = vi)
